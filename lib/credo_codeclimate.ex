@@ -33,20 +33,16 @@ defmodule CredoCodeClimate do
             end: %{column: column_end(issue.column, issue.trigger)}
           }
         },
-        severity: severity(issue.priority),
+        severity: severity(Credo.Priority.to_atom(issue.priority)),
         fingerprint: Integer.to_string(:erlang.phash2(issue), 16)
       }
     end
 
-    defp severity(priority) when is_number(priority) do
-      cond do
-        priority > 19 -> :blocker
-        priority in 10..19 -> :critical
-        priority in 0..9 -> :major
-        priority in -10..-1 -> :minor
-        priority < -10 -> :info
-      end
-    end
+    defp severity(:higher), do: :blocker
+    defp severity(:high), do: :critical
+    defp severity(:normal), do: :major
+    defp severity(:low), do: :minor
+    defp severity(:ignore), do: :info
 
     defp category(category) do
       case category do

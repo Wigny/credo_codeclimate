@@ -10,12 +10,12 @@ Add `credo_codeclimate` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:credo_codeclimate, github: "wigny/credo_codeclimate", tag: "0.1.0", only: [:dev, :test], runtime: false}
+    {:credo_codeclimate, github: "wigny/credo_codeclimate", tag: "0.1.1", only: [:dev, :test], runtime: false}
   ]
 end
 ```
 
-Add the plugin to your `.credo.exs` config file:
+And add the plugin to your `.credo.exs` config file:
 ```elixir
 %{
   configs: [
