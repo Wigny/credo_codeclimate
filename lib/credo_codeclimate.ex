@@ -63,15 +63,13 @@ defmodule CredoCodeClimate do
   end
 
   import Credo.Plugin
+  alias Credo.CLI.Command
 
   @doc false
   def init(exec) do
     exec
     |> register_cli_switch(:report_file, :string)
-    |> append_task(
-      Credo.CLI.Command.Suggest.SuggestCommand,
-      :print_after_analysis,
-      GenerateReport
-    )
+    |> append_task(Command.Suggest.SuggestCommand, :print_after_analysis, GenerateReport)
+    |> append_task(Command.Diff.DiffCommand, :print_after_analysis, GenerateReport)
   end
 end
